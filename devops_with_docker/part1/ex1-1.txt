@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE                  COMMAND                  CREATED              STATUS                      PORTS      NAMES
+87b43de23f53   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute           6379/tcp   third
+a94dd3e826d4   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Exited (0) 48 seconds ago              second
+ec24697763be   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Exited (0) 51 seconds ago              first
