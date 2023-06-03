@@ -1,0 +1,19 @@
+# remark: see https://stackoverflow.com/questions/37715224/copy-multiple-directories-with-one-command
+FROM node:16-slim
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+RUN npm install -g serve
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+
+CMD ["serve", "-s", "-l", "3000", "build"]
+

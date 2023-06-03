@@ -1,0 +1,22 @@
+FROM ruby:3.1.0
+
+WORKDIR /usr/src
+
+RUN gem install bundler:2.3.3 
+
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle install
+
+COPY . .
+
+ENV RAILS_ENV=production
+
+RUN rails db:migrate 
+
+RUN rake assets:precompile
+
+EXPOSE 3000
+
+CMD ["rails", "s", "-e", "production"]
+
