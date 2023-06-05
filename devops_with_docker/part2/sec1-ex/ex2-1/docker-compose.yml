@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  simple-web-service:
+    image: devopsdockeruh/simple-web-service
+    volumes: 
+      - ./text.log:/usr/src/app/text.log
+
+# remark: when using an existing image(pulled), then be careful not to mount a volume to its working directory in the container - it will overwrites and may delete files there
