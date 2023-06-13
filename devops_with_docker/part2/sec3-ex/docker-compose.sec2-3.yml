@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./example-frontend
+    # ports:
+    #   - "5000:5000" => since we now have a reverse proxy
+
+  backend:
+    build:
+      context: ./example-backend
+    # ports:
+    #   - "8080:8080" => since we now have a reverse proxy
+    environment:
+      REDIS_HOST: redis
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: example
+
+  redis:
+    image: redis:7.2-rc-alpine
+
+  db:
+    image: postgres:13-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: example
+    volumes:
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
+
+  reverse-proxy:
+    image: nginx:latest
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+    ports:
+      - "80:80"
