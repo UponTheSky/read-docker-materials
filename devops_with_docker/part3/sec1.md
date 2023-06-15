@@ -1,6 +1,21 @@
-# Deployment pipelines
-- setting up a deployment pipeline that can be used to automatically deploy containerized SW: for every commit pushed, the pipeline builds the image and starts it up in the server
+# Official Images and trust
 
-- example: a cicd pipeline with github actions, building image and pushing it to the docker hub
+## Look into official images
+- docker official images
+    - stored in the github repo("library of images")
+    - introduced into the library by PR
+    - verifying image: described in README.md
+    - images are maintained by either the docker-library organization or separate organizations
 
-## ex3.1 ~ 3.4: skipped
+- investigate official images: ubuntu
+    - `docker pull <image> && docker image history <image>`
+    - `FROM scratch`: means just empty
+    - `ADD`: copies new files, dirs, or remote file urls from `src`
+
+- so can we trust them?
+    - see `ADD` command
+    - see the checksum hash value(one of PR commits?)
+    - security issues on the official image page
+
+**Official images are nothing special**
+~                                                          
